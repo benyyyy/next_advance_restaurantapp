@@ -1,0 +1,322 @@
+[
+    {
+        "id": 1,
+        "name": "Chicken Biryani",
+        "category": "Indian",
+        "subcategory": "Main Course",
+        "price": 250,
+        "image": "https://www.themealdb.com/images/media/meals/wuxrtu1483564410.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Paneer Butter Masala",
+        "category": "Indian",
+        "subcategory": "Main Course",
+        "price": 200,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Spring Rolls",
+        "category": "Chinese",
+        "subcategory": "Snacks",
+        "price": 150,
+        "image": "https://indofoody.com/wp-content/uploads/2024/04/images-60.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "Shawarma",
+        "category": "Arabic",
+        "subcategory": "Snacks",
+        "price": 180,
+        "image": "https://www.themealdb.com/images/media/meals/kcv6hj1598733479.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Tandoori Chicken",
+        "category": "Indian",
+        "subcategory": "Starter",
+        "price": 300,
+        "image": "https://www.themealdb.com/images/media/meals/qptpvt1487339892.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Sushi",
+        "category": "Japanese",
+        "subcategory": "Main Course",
+        "price": 350,
+        "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Momos",
+        "category": "Chinese",
+        "subcategory": "Snacks",
+        "price": 120,
+        "image": "https://www.themealdb.com/images/media/meals/uyqrrv1511553350.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Hummus",
+        "category": "Arabic",
+        "subcategory": "Starter",
+        "price": 130,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7CB3SRmYr_98_2UJEaJrkRtyDRpzCdYqbqw&s"
+    },
+    {
+        "id": 9,
+        "name": "Chocolate Cake",
+        "category": "Desserts",
+        "subcategory": "Cakes",
+        "price": 220,
+        "image": "https://www.themealdb.com/images/media/meals/tqtywx1468317395.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Pasta Alfredo",
+        "category": "Italian",
+        "subcategory": "Main Course",
+        "price": 280,
+        "image": "https://www.themealdb.com/images/media/meals/uuxwvq1483907861.jpg"
+    },
+    {
+        "id": 11,
+        "name": "Dish 11",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 155,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Dish 12",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 160,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 13,
+        "name": "Dish 13",
+        "category": "Chinese",
+        "subcategory": "Variety",
+        "price": 165,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Dish 14",
+        "category": "Chinese",
+        "subcategory": "Variety",
+        "price": 170,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 15,
+        "name": "Dish 15",
+        "category": "Chinese",
+        "subcategory": "Variety",
+        "price": 175,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 16,
+        "name": "Dish 16",
+        "category": "Chinese",
+        "subcategory": "Variety",
+        "price": 180,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Dish 17",
+        "category": "Japanese",
+        "subcategory": "Snacks",
+        "price": 185,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Dish 18",
+        "category": "Japanese",
+        "subcategory": "Snacks",
+        "price": 190,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 19,
+        "name": "Dish 19",
+        "category": "Japanese",
+        "subcategory": "Snacks",
+        "price": 195,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 20,
+        "name": "Dish 20",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 200,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 21,
+        "name": "Dish 21",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 205,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 22,
+        "name": "Dish 22",
+        "category": "Desserts",
+        "subcategory": "Variety",
+        "price": 210,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 23,
+        "name": "Dish 23",
+        "category": "Desserts",
+        "subcategory": "Variety",
+        "price": 215,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 24,
+        "name": "Dish 24",
+        "category": "Desserts",
+        "subcategory": "Variety",
+        "price": 220,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 25,
+        "name": "Dish 25",
+        "category": "Desserts",
+        "subcategory": "Variety",
+        "price": 225,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 26,
+        "name": "Dish 26",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 230,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 27,
+        "name": "Dish 27",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 235,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 28,
+        "name": "Dish 28",
+        "category": "Arabic",
+        "subcategory": "Cakes",
+        "price": 240,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 29,
+        "name": "Dish 29",
+        "category": "Arabic",
+        "subcategory": "Cakes",
+        "price": 245,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 30,
+        "name": "Dish 30",
+        "category": "Mixed",
+        "subcategory": "Cakes",
+        "price": 250,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 31,
+        "name": "Dish 31",
+        "category": "Arabic",
+        "subcategory": "Variety",
+        "price": 255,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 32,
+        "name": "Dish 32",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 260,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 33,
+        "name": "Dish 33",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 265,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 34,
+        "name": "Dish 34",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 270,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 35,
+        "name": "Dish 35",
+        "category": "Arabic",
+        "subcategory": "Variety",
+        "price": 275,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 36,
+        "name": "Dish 36",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 280,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 37,
+        "name": "Dish 37",
+        "category": "Mixed",
+        "subcategory": "Variety",
+        "price": 285,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 38,
+        "name": "Dish 38",
+        "category": "Indian",
+        "subcategory": "Variety",
+        "price": 290,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 39,
+        "name": "Dish 39",
+        "category": "Indian",
+        "subcategory": "Variety",
+        "price": 295,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+        "id": 40,
+        "name": "Dish 40",
+        "category": "Indian",
+        "subcategory": "Variety",
+        "price": 300,
+        "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    }
+]
