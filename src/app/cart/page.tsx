@@ -17,8 +17,6 @@ export default function CartPage() {
   // Calculate total price
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-
-  
   const handleCheckout = async () => {
     setLoading(true);
     
@@ -29,11 +27,11 @@ export default function CartPage() {
       setLoading(false);
       return;
     }
-  
-console.log("Cart items being sent to payment API:", cart);
-console.log("Total Price:", totalPrice);
-console.log("Total Price:", totalPrice);
-const response = await fetch("/api/payment", {
+
+    console.log("Cart items being sent to payment API:", cart);
+    console.log("Total Price:", totalPrice);
+
+    const response = await fetch("/api/payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cart }),
@@ -56,7 +54,6 @@ const response = await fetch("/api/payment", {
     setLoading(false);
   };
   
-
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
@@ -86,7 +83,6 @@ const response = await fetch("/api/payment", {
             </div>
           ))}
 
-          {/* Display total price */}
           <div className="mt-4 p-4 border-t text-lg font-semibold">
             <p>Total Bill: ₹{totalPrice.toFixed(2)}</p>
           </div>
@@ -95,9 +91,8 @@ const response = await fetch("/api/payment", {
             Clear Cart
           </button>
 
-            {/* Pay Now Button */}
-            <button
-           onClick={handleCheckout}
+          <button
+            onClick={handleCheckout}
             className="bg-green-500 text-white px-4 py-2 rounded mt-4 w-full"
           >
             Pay Now

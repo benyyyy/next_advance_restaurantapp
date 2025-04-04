@@ -3,7 +3,18 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
+// Set CORS headers
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
 export async function POST(req: Request) {
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return NextResponse.json({}, { headers: corsHeaders });
+  }
   try {
     const { cartItems } = await req.json();
 
@@ -27,8 +38,8 @@ export async function POST(req: Request) {
       payment_method_types: ["card"], // UPI is handled through "card"
       line_items: lineItems,
       mode: "payment",
-      success_url: `${process.env.SITE_URL}/success|| "http://localhost:3000"`,
-      cancel_url: `${process.env.SITE_URL}/cart|| "http://localhost:3000"`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL}/success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL}/cart`,
     });
 
     return NextResponse.json({ id: session.id });
