@@ -1,10 +1,11 @@
 "use client"
 import Link from 'next/link'
 import { useState } from 'react'
-
+import { useCart } from '@/context/CartContext/page'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-
+  const { cart } = useCart();
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <nav className="bg-purple-400 shadow-lg">
       <div className="max-w-6xl mx-auto px-4">
@@ -28,6 +29,10 @@ export default function Navbar() {
               <Link href="/contact" className="py-4 px-2 text-gray-700 font-semibold hover:text-green-400  transition duration-300">
                 Contact
               </Link>
+
+             
+
+
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-3">
@@ -37,6 +42,11 @@ export default function Navbar() {
             <Link href="/register" className="py-2 px-2 font-medium text-white bg-primary rounded hover:bg-primary-dark transition duration-300">
               Sign Up
             </Link>
+            <Link href="/cart">
+        <div className="py-4 px-2 text-gray-700 font-semibold hover:text-green-400  transition duration-300">
+          🛒 Cart ({totalItems})
+        </div>
+      </Link>
           </div>
           <div className="md:hidden flex items-center">
             <button 
