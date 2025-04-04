@@ -34,7 +34,7 @@ export default function CartPage() {
     const response = await fetch("/api/payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cart }),
+      body: JSON.stringify({ cartItems: cart }),
     });
   
     const session = await response.json();
