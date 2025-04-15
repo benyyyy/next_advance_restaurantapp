@@ -18,9 +18,10 @@ export default function HomePage() {
             <Link href="/menu" className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
             View Menu
                     </Link>
-            <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
-              Book a Table
-            </button>
+                    <Link href="/tablebook" className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
+                    Book a Table
+                    </Link>
+          
           </div>
         </div>
       </div>

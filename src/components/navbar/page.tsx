@@ -76,6 +76,11 @@ export default function Navbar() {
                     <Link href="/admin" className="text-gray-800 hover:text-red-600 font-semibold">
                       Admin Dashboard
                     </Link>
+
+                
+                    <Link href="/tablebook" className="text-gray-800 hover:text-red-600 font-semibold">
+                      View Bookings
+                    </Link>
                   </>
                 )}
 

@@ -18,6 +18,24 @@ service cloud.firestore {
                    && request.resource.data.keys().hasAll(['status'])
                    && request.resource.data.keys().hasOnly(['status']);
     }
+
+    // Reservations collection rules
+    match /reservations/{reservationId} {
+      // Users can read their own reservations
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+
+      // Users can create new reservations with required fields
+      allow create: if request.auth != null
+                   && request.resource.data.keys().hasAll(['userId', 'date', 'time', 'partySize', 'name', 'email', 'phone', 'specialRequests', 'status'])
+                   && request.resource.data.userId == request.auth.uid
+                   && request.resource.data.status == 'confirmed';
+
+      // Admins can update reservation status
+      allow update: if request.auth != null
+                   && request.auth.token.admin == true
+                   && request.resource.data.keys().hasAll(['status'])
+                   && request.resource.data.keys().hasOnly(['status']);
+    }
     
     // Default deny-all rule
     match /{document=**} {

@@ -1,177 +1,249 @@
-// // app/book-table/page.tsx
-// "use client";
-// import { useState } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { db } from '@/lib/firebase-admin';
-// import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+"use client";
 
-// export default function BookTablePage() {
-//   const [date, setDate] = useState<Date | null>(new Date());
-//   const [time, setTime] = useState('19:00');
-//   const [partySize, setPartySize] = useState(2);
-//   const [name, setName] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [phone, setPhone] = useState('');
-//   const [specialRequests, setSpecialRequests] = useState('');
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const router = useRouter();
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/navigation";
 
-//   const availableTimes = ['11:00', '12:30', '14:00', '17:30', '19:00', '20:30', '22:00'];
-//   const partySizes = [1, 2, 3, 4, 5, 6, 7, 8];
+interface Booking {
+  id: string;
+  userId: string;
+  userEmail: string;
+  date: string;
+  time: string;
+  partySize: number;
+  phone?: string;
+}
 
-//   const handleSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setIsSubmitting(true);
+export default function TableBookPage() {
+  const { user, isAdmin, loading } = useAuth();
+  const router = useRouter();
 
-//     try {
-//       await addDoc(collection(db, 'reservations'), {
-//         date,
-//         time,
-//         partySize,
-//         name,
-//         email,
-//         phone,
-//         specialRequests,
-//         createdAt: serverTimestamp(),
-//         status: 'confirmed'
-//       });
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [formData, setFormData] = useState({
+    date: "",
+    time: "",
+    partySize: 1,
+    phone: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-//       router.push(`/booking-confirmation?date=${date?.toISOString()}&time=${time}&partySize=${partySize}`);
-//     } catch (error) {
-//       console.error('Booking error:', error);
-//       alert('Failed to book table. Please try again.');
-//     } finally {
-//       setIsSubmitting(false);
-//     }
-//   };
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [loading, user, router]);
 
-//   // Disable past dates and dates more than 3 months in advance
-//   const isDateDisabled = (date: Date) => {
-//     const today = new Date();
-//     today.setHours(0, 0, 0, 0);
-//     const threeMonthsLater = new Date();
-//     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
-//     return date < today || date > threeMonthsLater;
-//   };
+  useEffect(() => {
+    if (!loading && isAdmin) {
+      fetch("/api/tablebook")
+        .then((res) => res.json())
+        .then((data) => setBookings(data))
+        .catch((err) => console.error("Failed to fetch bookings", err));
+    }
+  }, [loading, isAdmin]);
 
-//   return (
-//     <div className="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-//       <h1 className="text-3xl font-bold text-center mb-8">Book a Table</h1>
-      
-//       <form onSubmit={handleSubmit} className="space-y-6">
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//           {/* Date Picker */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Date
-//             </label>
-//             <DatePicker
-//               selected={date}
-//               onChange={(date) => setDate(date)}
-//               filterDate={isDateDisabled}
-//               minDate={new Date()}
-//               className="w-full p-2 border rounded-md"
-//               dateFormat="MMMM d, yyyy"
-//             />
-//           </div>
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "partySize" ? Number(value) : value,
+    }));
+  };
 
-//           {/* Time Selector */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Time
-//             </label>
-//             <select
-//               value={time}
-//               onChange={(e) => setTime(e.target.value)}
-//               className="w-full p-2 border rounded-md"
-//             >
-//               {availableTimes.map((t) => (
-//                 <option key={t} value={t}>{t}</option>
-//               ))}
-//             </select>
-//           </div>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError("");
 
-//           {/* Party Size */}
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Party Size
-//             </label>
-//             <select
-//               value={partySize}
-//               onChange={(e) => setPartySize(Number(e.target.value))}
-//               className="w-full p-2 border rounded-md"
-//             >
-//               {partySizes.map((size) => (
-//                 <option key={size} value={size}>{size} {size === 1 ? 'person' : 'people'}</option>
-//               ))}
-//             </select>
-//           </div>
-//         </div>
+        if (!formData.date || !formData.time || !formData.partySize || !formData.phone) {
+          setError("Please fill in all fields");
+          setSubmitting(false);
+          return;
+        }
 
-//         {/* Contact Information */}
-//         <div className="space-y-4">
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Full Name
-//             </label>
-//             <input
-//               type="text"
-//               value={name}
-//               onChange={(e) => setName(e.target.value)}
-//               className="w-full p-2 border rounded-md"
-//               required
-//             />
-//           </div>
+    try {
+      const response = await fetch("/api/tablebook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?.uid,
+          userEmail: user?.email,
+          date: formData.date,
+          time: formData.time,
+          partySize: formData.partySize,
+          phone: formData.phone,
+        }),
+      });
 
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Email
-//             </label>
-//             <input
-//               type="email"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//               className="w-full p-2 border rounded-md"
-//               required
-//             />
-//           </div>
+      if (!response.ok) {
+        const data = await response.json();
+        setError(data.error || "Failed to book table");
+        setSubmitting(false);
+        return;
+      }
 
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Phone Number
-//             </label>
-//             <input
-//               type="tel"
-//               value={phone}
-//               onChange={(e) => setPhone(e.target.value)}
-//               className="w-full p-2 border rounded-md"
-//               required
-//             />
-//           </div>
+      router.push(
+        `/booking-confirmation?date=${encodeURIComponent(formData.date)}&time=${encodeURIComponent(
+          formData.time
+        )}&partySize=${encodeURIComponent(formData.partySize.toString())}`
+      );
+    } catch (err) {
+      setError("Failed to book table");
+      setSubmitting(false);
+    }
+  };
 
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 mb-1">
-//               Special Requests (Optional)
-//             </label>
-//             <textarea
-//               value={specialRequests}
-//               onChange={(e) => setSpecialRequests(e.target.value)}
-//               className="w-full p-2 border rounded-md"
-//               rows={3}
-//             />
-//           </div>
-//         </div>
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-//         <button
-//           type="submit"
-//           disabled={isSubmitting}
-//           className="w-full bg-primary py-3 px-4 rounded-md text-white font-medium hover:bg-primary-dark transition disabled:opacity-50"
-//         >
-//           {isSubmitting ? 'Booking...' : 'Confirm Reservation'}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
+  if (isAdmin) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <h1 className="text-2xl font-bold mb-4">Table Bookings</h1>
+        {bookings.length === 0 ? (
+          <p>No bookings found.</p>
+        ) : (
+          <table className="min-w-full border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border px-4 py-2">User Email</th>
+                <th className="border px-4 py-2">Date</th>
+                <th className="border px-4 py-2">Time</th>
+                <th className="border px-4 py-2">Party Size</th>
+                <th className="border px-4 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((booking) => (
+                <tr key={booking.id}>
+                  <td className="border px-4 py-2">{booking.userEmail}</td>
+                  <td className="border px-4 py-2">{booking.date}</td>
+                  <td className="border px-4 py-2">{booking.time}</td>
+                  <td className="border px-4 py-2">{booking.partySize}</td>
+                  <td className="border px-4 py-2">
+                    <button
+                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                      onClick={() => sendConfirmation(booking)}
+                    >
+                      Send Confirmation
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
+
+  }
+
+  async function sendConfirmation(booking: Booking) {
+    try {
+      const response = await fetch('/api/tablebook/sendConfirmation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userEmail: booking.userEmail,
+          userPhone: booking.phone || '', // Use phone from booking if available
+          userName: booking.userEmail.split('@')[0], // Use email prefix as name fallback
+          date: booking.date,
+          time: booking.time,
+          partySize: booking.partySize,
+        }),
+      });
+
+      if (!response.ok) {
+        alert('Failed to send confirmation');
+        return;
+      }
+
+      alert('Confirmation sent successfully');
+    } catch (error) {
+      console.error('Error sending confirmation:', error);
+      alert('Error sending confirmation');
+    }
+  }
+
+  return (
+    <div className="max-w-md mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4">Book a Table</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <p className="text-red-600">{error}</p>}
+        <div>
+          <label htmlFor="date" className="block font-medium mb-1">
+            Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="time" className="block font-medium mb-1">
+            Time
+          </label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="partySize" className="block font-medium mb-1">
+            Party Size
+          </label>
+          <select
+            id="partySize"
+            name="partySize"
+            value={formData.partySize}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
+          >
+            {[...Array(10)].map((_, i) => (
+              <option key={i + 1} value={i + 1}>
+                {i + 1} {i === 0 ? "person" : "people"}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="phone" className="block font-medium mb-1">
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={submitting}
+          className="bg-amber-100 text-green-500 font-bold py-2 px-4 rounded hover:bg-primary-dark transition"
+        >
+          {submitting ? "Booking..." : "Book Table"}
+        </button>
+      </form>
+    </div>
+  );
+}
