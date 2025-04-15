@@ -1,3 +1,4 @@
+import Link from 'next/link'
 export default function HomePage() {
     return (
       <div className="relative bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white">
@@ -10,9 +11,13 @@ export default function HomePage() {
             Discover the finest dining experience with our exquisite menu crafted by world-class chefs.
           </p>
           <div className="mt-10 flex justify-center space-x-4">
-            <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
+            {/* <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
               View Menu
-            </button>
+            </button> */}
+
+            <Link href="/menu" className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
+            View Menu
+                    </Link>
             <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 transition duration-300 shadow-lg md:py-4 md:text-lg md:px-10">
               Book a Table
             </button>
